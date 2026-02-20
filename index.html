@@ -2,146 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Timer - Focus & Productivity</title>
+    <title>Pomodoro System</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Animated Starfield Background -->
-    <div id="starfield"></div>
-    <div id="cursor-glow"></div>
 
-    <!-- Sidebar Dashboard -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2>Dashboard</h2>
-        </div>
-        
-        <!-- Current Time Display -->
-        <div class="clock-section">
-            <div class="clock-label">Current Time</div>
-            <div id="current-time" class="current-time">00:00:00</div>
-            <div id="current-date" class="current-date">Loading...</div>
-        </div>
+<div class="sidebar">
+    <a href="#" class="nav-item active" data-view="pomodoro">Pomodoro</a>
+    <a href="#" class="nav-item" data-view="stats">Statistics</a>
+    <a href="#" class="nav-item" data-view="settings">Settings</a>
+</div>
 
-        <!-- Navigation -->
-        <nav class="sidebar-nav">
-            <a href="#" class="nav-item active" data-view="pomodoro">
-                <span class="nav-icon">🍅</span>
-                <span class="nav-text">Pomodoro</span>
-            </a>
-            <a href="#" class="nav-item" data-view="stats">
-                <span class="nav-icon">📊</span>
-                <span class="nav-text">Statistics</span>
-            </a>
-            <a href="#" class="nav-item" data-view="settings">
-                <span class="nav-icon">⚙️</span>
-                <span class="nav-text">Settings</span>
-            </a>
-        </nav>
+<div class="main">
 
-        <!-- Session Info -->
-        <div class="session-info">
-            <div class="info-item">
-                <span class="info-label">Sessions Today</span>
-                <span id="sessions-count" class="info-value">0</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Focus Time</span>
-                <span id="focus-time" class="info-value">0h 0m</span>
-            </div>
-        </div>
-    </div>
+<!-- POMODORO -->
+<div id="view-pomodoro" class="view active-view">
+    <h1>Focus Session</h1>
+    <div class="timer" id="timer">45:00</div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Top Status Bars -->
-        <div class="status-bars">
-            <div class="status-bar clock-bar">
-                <div class="status-icon">🕐</div>
-                <div class="status-text">
-                    <span class="status-label">System Clock</span>
-                    <span id="header-time" class="status-value">00:00</span>
-                </div>
-            </div>
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="reset">Reset</button>
+</div>
 
-            <div class="status-bar timer-bar">
-                <div class="status-icon">⏱️</div>
-                <div class="status-text">
-                    <span class="status-label">Timer Status</span>
-                    <span id="timer-status" class="status-value">Ready</span>
-                </div>
-            </div>
+<!-- STATISTICS -->
+<div id="view-stats" class="view">
+    <h1>Statistics</h1>
 
-            <div class="status-bar break-bar">
-                <div class="status-icon">☕</div>
-                <div class="status-text">
-                    <span class="status-label">Break Time</span>
-                    <span id="break-status" class="status-value">Waiting</span>
-                </div>
-            </div>
-        </div>
+    <div class="stats-box">Today Sessions: <span id="todaySessions">0</span></div>
+    <div class="stats-box">Today Focus (min): <span id="todayFocus">0</span></div>
+    <div class="stats-box">Best Day Sessions: <span id="bestDay">0</span></div>
 
-        <!-- Central Timer -->
-        <div class="timer-container">
-            <div class="timer-circle">
-                <svg class="progress-ring" width="300" height="300">
-                    <circle class="progress-ring-bg" cx="150" cy="150" r="140"></circle>
-                    <circle class="progress-ring-fill" cx="150" cy="150" r="140"></circle>
-                </svg>
-                
-                <div class="timer-content">
-                    <div id="timer-display" class="timer-display">45:00</div>
-                    <div id="timer-label" class="timer-label">Pomodoro Session</div>
-                    <div class="timer-phase" id="timer-phase">Ready to Start</div>
-                </div>
-            </div>
+    <button id="resetStats">Reset Statistics</button>
+</div>
 
-            <!-- Timer Controls -->
-            <div class="timer-controls">
-                <button id="start-btn" class="control-btn primary">
-                    <span class="btn-icon">▶️</span>
-                    <span class="btn-text">Start</span>
-                </button>
-                <button id="pause-btn" class="control-btn secondary" disabled>
-                    <span class="btn-icon">⏸️</span>
-                    <span class="btn-text">Pause</span>
-                </button>
-                <button id="reset-btn" class="control-btn tertiary">
-                    <span class="btn-icon">🔄</span>
-                    <span class="btn-text">Reset</span>
-                </button>
-            </div>
-        </div>
-    </div>
+<!-- SETTINGS -->
+<div id="view-settings" class="view">
+    <h1>Settings</h1>
 
-    <!-- Panda Celebration -->
-    <div id="panda-celebration" class="panda-celebration">
-        <div class="panda-container">
-            <div class="panda-emoji">🐼</div>
-            <div class="celebration-text">Great Work!</div>
-            <div class="celebration-subtext">Time for a break!</div>
-            <div class="confetti"></div>
-        </div>
-    </div>
+    Focus Duration (minutes)<br>
+    <input type="number" id="focusInput"><br><br>
 
-    <!-- Ad Section -->
-    <div id="ad-box" class="ad-section">
-        <div class="ad-header">Advertisement</div>
-        <div class="ad-content">
-            <div class="ad-placeholder">
-                <div class="ad-text">Your Ad Here</div>
-                <div class="ad-subtext">Monetize with ads</div>
-            </div>
-        </div>
-    </div>
+    Break Duration (minutes)<br>
+    <input type="number" id="breakInput"><br><br>
 
-    <!-- Audio Elements -->
-    <audio id="notification-sound" preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmUUBEGa2+/EdiMFl2+z9tCAVA0PaaLd66hVFAhOouL2u3QjBTyLxfLdh0IIDn+92tb2w3ElBWqyueDY2+XFuVIcBr+y6uhDl/JQFP2tX4XF8diJNwgZaLvv4ZYmAT6Lz+vde0UKF2y27eSPQAoUYaXmtWAJAEqjzfHhm1ELDn/A1dYLKpPT5eBg3r1I=" type="audio/wav">
-    </audio>
+    <label>
+        <input type="checkbox" id="soundInput"> Enable Sound
+    </label><br><br>
 
-    <script src="script.js"></script>
+    <button id="saveSettings">Save Settings</button>
+</div>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
